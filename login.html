@@ -14,42 +14,44 @@
     <title>Document</title>
   </head>
   <body>
-    <script src="js/middlewares/redirectLogInMiddleware.js"></script>
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Navbar</span>
-        <form id="search-form" class="d-flex">
-          <input
-            id="search"
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <button id="logOut" class="btn btn-outline-danger">Logout</button>
       </div>
     </nav>
 
     <div class="container mt-2">
       <div class="row">
         <div class="col-12 d-flex justify-content-center">
-          <table class="table table-dark table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-              </tr>
-            </thead>
-            <tbody id="owners-list"></tbody>
-          </table>
-        </div>
-        <div class="col">
-          <a class="btn btn-outline-primary" href="/createOwner.html"
-            >Add Owner</a
-          >
+          <form id="login-form" class="p-5" method="post">
+            <div class="row py-1">
+              <div class="col">
+                <input
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Username"
+                />
+                <div class="invalid-feedback">Please insert an username.</div>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col">
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                />
+                <div class="invalid-feedback">Please insert a password.</div>
+              </div>
+            </div>
+            <div class="row py-2">
+              <div class="col">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -64,7 +66,6 @@
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
-    <script src="js/main.js"></script>
-    <script src="js/middlewares/logOutMiddleware.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

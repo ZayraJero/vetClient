@@ -17,6 +17,7 @@ $("#owners-create-form").on("submit", async (event) => {
   const email = $("#email").val();
   if (!email) {
     $("#email").addClass("is-invalid");
+    $("#email-feedback").text("Please insert an email.");
     return;
   } else {
     $("#email").removeClass("is-invalid");
@@ -24,6 +25,7 @@ $("#owners-create-form").on("submit", async (event) => {
   const phone = $("#phone").val();
   if (!phone) {
     $("#phone").addClass("is-invalid");
+    $("#phone-feedback").text("Please insert a phone.");
     return;
   } else {
     $("#phone").removeClass("is-invalid");
@@ -37,21 +39,36 @@ $("#owners-create-form").on("submit", async (event) => {
   }
   console.log("submit", firstName, lastName, email, phone, address);
 
-  const data = await fetch("http://localhost:8000/api/owners/create/", {
-    method: "POST",
-    headers: {
-      Authorization: "Token 2a0626275cd60fc1d45075ce01e4ffc48666467e",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      first_name: firstName,
-      last_name: lastName,
-      email,
-      phone,
-      address,
-    }),
-  });
-  const json = await data.json();
-
-  window.location.href = "/";
+  try {
+    const data = await fetch("http://localhost:8000/api/owners/create/", {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${authtoken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone,
+        address,
+      }),
+    });
+    const json = await data.json();
+    if (data.status === 400) {
+      if (json.email) {
+        $("#email").addClass("is-invalid");
+        $("#email-feedback").text(json.email[0]);
+      }
+      if (json.phone) {
+        $("#phone").addClass("is-invalid");
+        $("#phone-feedback").text(json.phone[0]);
+      }
+    }
+    if (data.status === 201) {
+      window.location.href = "/";
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });

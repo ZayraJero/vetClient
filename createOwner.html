@@ -14,6 +14,7 @@
     <title>Document</title>
   </head>
   <body>
+    <script src="js/middlewares/redirectLogInMiddleware.js"></script>
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Navbar</span>
@@ -52,7 +53,7 @@
                   class="form-control"
                   placeholder="Email"
                 />
-                <div class="invalid-feedback">Please insert an email.</div>
+                <div id="email-feedback" class="invalid-feedback"></div>
               </div>
               <div class="col">
                 <input
@@ -61,7 +62,9 @@
                   class="form-control"
                   placeholder="Phone"
                 />
-                <div class="invalid-feedback">Please insert a phone.</div>
+                <div id="phone-feedback" class="invalid-feedback">
+                  Please insert a phone.
+                </div>
               </div>
             </div>
             <div class="row py-1">
